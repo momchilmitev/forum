@@ -6,7 +6,7 @@
   <title>Forum</title>
 </head>
 <body>
-  <h1>Register form:</h1>
+<h1>Login form:</h1>
   <form action="" method="post">
     Username: <input type="text" name="username"><br>
     Passwod: <input type="text" name="password"><br>
