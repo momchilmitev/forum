@@ -14,3 +14,11 @@
     header("Location: login.php");
     exit;
   }
+
+  function url (string $url): string {
+    if (strstr($url, "?")) {
+      return $url . '&authId=' . $_GET["authId"];
+    }
+
+    return $url . '?authId=' . $_GET["authId"];
+  }
