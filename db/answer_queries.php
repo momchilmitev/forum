@@ -16,6 +16,9 @@ function getAnswersByQuestionId(PDO $db, int $id): array
       a.author_id = u.id
     WHERE
       a.question_id = ?
+    ORDER BY
+      a.created_on DESC,
+      a.id ASC
   ";
 
   $stmt = $db->prepare($query);

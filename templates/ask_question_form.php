@@ -6,6 +6,7 @@
   <title>Forum</title>
 </head>
 <body>
+<a href="<?= url("category.php?id={$_GET['category_id']}"); ?>">Back to questions in this category</a>
   <form method="POST" action="">
     Title: <input type="text" name="title"><br>
     Questions: <br>

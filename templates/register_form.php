@@ -12,6 +12,10 @@
     Passwod: <input type="text" name="password"><br>
     <input type="submit" value="send">
   </form>
+  <div>
+    <a href="login.php">or login</a>
+  </div>
+  <br>
   <div id="response">
     <?= $response ?>
   </div>

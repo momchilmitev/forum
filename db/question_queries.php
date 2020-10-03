@@ -11,7 +11,8 @@ function getQuestionById(PDO $db, int $id): array {
       q.author_id,
       q.created_on,
       u.username AS 'author_name',
-      c.name AS 'category_name'
+      c.name AS 'category_name',
+      c.id AS 'category_id'
     FROM
       questions AS q
     INNER JOIN

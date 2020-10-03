@@ -6,6 +6,7 @@
   <title>Forum</title>
 </head>
 <body>
+  <a href="<?= url("category.php?id={$question['category_id']}"); ?>">Back to questions in this category</a>
   <div>
     <h2>
       Title: <?= $question['title'] ?>
