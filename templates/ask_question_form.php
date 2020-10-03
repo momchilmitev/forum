@@ -22,7 +22,7 @@
       <?php endforeach; ?>
     </select> <br>
     Tags: <br>
-    <select multiple="multiple" name="existing_tags[]">
+    <select multiple name="existing_tags[]">
       <?php foreach($tags as $tag): ?>
         <option value="<?= $tag['id'] ?>">
           <?= $tag['name']; ?> (<?= $tag['questions_count']; ?>)

@@ -4,12 +4,12 @@ function getQuestionsByCategoryId(PDO $db, int $category_id): array {
   $query = "
     SELECT
       q.id,
-      q.title
+      q.title,
       q.author_id,
-      q.create_on,
-      u.username,
-      c.name,
-      COUNT(a.id) AS answers_id
+      q.created_on,
+      u.username AS 'author_name',
+      c.name AS 'category_name',
+      COUNT(a.id) AS answers_count
     FROM
       questions AS q
     INNER JOIN
@@ -23,14 +23,14 @@ function getQuestionsByCategoryId(PDO $db, int $category_id): array {
     INNER JOIN
       categories AS c
     ON
-      q.categorie_id = c.id
+      q.category_id = c.id
     WHERE
       c.id = ?
     GROUP BY
       q.id,
-      q.title
+      q.title,
       q.author_id,
-      q.create_on,
+      q.created_on,
       u.username,
       c.name
     ORDER BY

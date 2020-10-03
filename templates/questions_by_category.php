@@ -7,15 +7,21 @@
 </head>
 <body>
   <a href="<?= url("ask_question.php?category_id=$id") ?>">Ask new question</a>
-  <table border="1">
-  <thead>
-    <tr>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
+  <hr>
 
-  </tbody>
-  </table>
+  <?php foreach($questions as $question): ?>
+    <div>
+      <h2>
+        <a href="<?= url("question.php?id={$question['id']}") ?>">
+          <?= $question['title'] ?>
+        </a>
+        (<?= $question['answers_count'] ?>)
+      </h2>
+      <span><?= $question['author_name'] ?></span>
+      <span><?= $question['created_on'] ?></span>
+      <span><?= $question['category_name'] ?></span>
+    </div>
+    <hr>
+  <?php endforeach; ?>
 </body>
 </html>

@@ -2,6 +2,35 @@
 
 require_once("tag_queries.php");
 
+function getQuestionById(PDO $db, int $id): array {
+  $query = "
+    SELECT
+      q.id,
+      q.title,
+      q.body,
+      q.author_id,
+      q.created_on,
+      u.username AS 'author_name',
+      c.name AS 'category_name'
+    FROM
+      questions AS q
+    INNER JOIN
+      users AS u
+    ON
+      q.author_id = u.id
+    INNER JOIN
+      categories AS c
+    ON
+     q.category_id = c.id
+    WHERE
+      q.id = ?
+  ";
+
+  $stmt = $db->prepare($query);
+  $stmt->execute([$id]);
+  return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
 function createQuestion(
   PDO $db, 
   int $userId, 

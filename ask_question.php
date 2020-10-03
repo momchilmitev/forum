@@ -26,7 +26,10 @@ if (isset($_POST["title"], $_POST["body"])) {
 
   $result = createQuestion($db, $userId, $title, $body, $category, $existingTags, $newTags);
 
-  var_dump($result);
+  if ($result) {
+    header("Location: " . url("question.php?id={$result}"));
+    exit;
+  }
 }
 
 require_once("templates/ask_question_form.php");
