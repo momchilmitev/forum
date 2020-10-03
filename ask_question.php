@@ -13,7 +13,6 @@ require_once("db/tag_queries.php");
 
 $categories = getAllCategories($db);
 $tags = getAllTags($db);
-var_dump($tags);
 
 if (isset($_POST["title"], $_POST["body"])) {
   $title = $_POST["title"];

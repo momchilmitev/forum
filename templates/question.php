@@ -27,5 +27,10 @@
     </div>
     <hr>
   <?php endforeach; ?>
+  <form method="post">
+    Your answer here: <br>
+    <textarea name="body" cols="30" rows="10"></textarea><br>
+    <input type="submit" value="answer" name="answer">
+  </form>
 </body>
 </html>
