@@ -6,6 +6,7 @@
   <title>Forum</title>
 </head>
 <body>
+  <?php require_once('templates/logout.php'); ?>
   <a href="<?= url("categories.php?"); ?>">Back to all categories</a><br>
   <a href="<?= url("ask_question.php?category_id=$id") ?>">Ask new question</a>
   <hr>

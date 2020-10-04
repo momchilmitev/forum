@@ -6,6 +6,7 @@
   <title>Forum</title>
 </head>
 <body>
+  <?php require_once('templates/logout.php'); ?>
   <table border="1">
     <thead>
       <tr>
