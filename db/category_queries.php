@@ -25,7 +25,8 @@ function getQuestionsByCategoryId(PDO $db, int $category_id): array {
       q.created_on,
       u.username AS 'author_name',
       c.name AS 'category_name',
-      COUNT(a.id) AS answers_count
+      COUNT(a.id) AS answers_count,
+      COUNT(l.user_id) AS likes_count
     FROM
       questions AS q
     INNER JOIN
@@ -36,6 +37,10 @@ function getQuestionsByCategoryId(PDO $db, int $category_id): array {
       answers AS a
     ON
       q.id = a.question_id
+    LEFT JOIN
+      user_likes AS l
+    ON
+      q.id = l.question_id
     INNER JOIN
       categories AS c
     ON

@@ -1,4 +1,41 @@
 <?php
+  function like(PDO $db, int $userId, int $questionId)
+  {
+    $query = "
+      INSERT INTO
+        user_likes (
+          user_id,
+          question_id
+        )
+      VALUES (
+        ?,
+        ?
+      )
+    ";
+
+    $stmt = $db->prepare($query);
+    $stmt->execute([$userId, $questionId]);
+  }
+
+  function dislike(PDO $db, int $userId, int $questionId)
+  {
+    $query = "
+      DELETE FROM user_likes WHERE user_id = ? AND question_id = ?";
+
+    $stmt = $db->prepare($query);
+    $stmt->execute([$userId, $questionId]);
+  }
+
+  function hasLike(PDO $db, int $userId, int $questionId): bool
+  {
+    $query = "
+      SELECT * FROM user_likes WHERE user_id = ? AND question_id = ?";
+
+    $stmt = $db->prepare($query);
+    $stmt->execute([$userId, $questionId]);
+    return !empty($stmt->fetchAll(PDO::FETCH_ASSOC));
+  }
+
   function logout(PDO $db, string $authId): void
   {
     $query = "

@@ -21,7 +21,15 @@
       </h2>
       <span><?= $question['author_name'] ?></span>
       <span><?= $question['created_on'] ?></span>
-      <span><?= $question['category_name'] ?></span>
+      <span><?= $question['category_name'] ?></span><br>
+      <span>Likes: <?= $question['likes_count'] ?></span>
+    </div>
+    <div>
+      <?php if (hasLike($db, $userId, $question['id'])): ?>
+        <a href="<?= url("category.php?id={$_GET["id"]}&action=dislike&question_id={$question['id']}"); ?>">dislike</a>
+      <?php else: ?>
+        <a href="<?= url("category.php?id={$_GET["id"]}&action=like&question_id={$question['id']}"); ?>">like</a>
+      <?php endif; ?>
     </div>
     <hr>
   <?php endforeach; ?>
