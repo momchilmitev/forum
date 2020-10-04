@@ -7,6 +7,11 @@
 </head>
 <body>
   <?php require_once('templates/logout.php'); ?>
+
+  <?php if (hasRole($db, $userId, 'ADMIN')): ?>
+    <a href="<?= url("create_category.php"); ?>">Create new category</a> |
+  <?php endif; ?>
+
   <table border="1">
     <thead>
       <tr>

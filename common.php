@@ -22,3 +22,9 @@
 
     return $url . '?authId=' . $_GET["authId"];
   }
+
+  function hasRole(PDO $db, int $userId, string $role): bool
+  {
+    $roles = getRolesByUserId($db, $userId);
+    return in_array($role, $roles);
+  }

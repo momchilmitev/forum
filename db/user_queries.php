@@ -49,6 +49,26 @@
     return $authString;
   }
 
+  function getRolesByUserId(PDO $db, int $userId): array
+  {
+    $query = "
+      SELECT
+        r.name
+      FROM
+        users_roles AS ur
+      INNER JOIN
+        roles AS r
+      ON
+        ur.role_id = r.id
+      WHERE
+        user_id = ?
+    ";
+
+    $stmt = $db->prepare($query);
+    $stmt->execute([$userId]);
+    return array_map(function($r) { return $r['name']; }, $stmt->fetchAll(PDO::FETCH_ASSOC));
+  }
+
   function getUserByAuthId(PDO $db, string $authId): int {
     $query = "
       SELECT
@@ -87,6 +107,7 @@
     }
 
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    var_dump($user);
     $passwordHash = $user['password'];
 
     $result = password_verify($password, $passwordHash);
@@ -113,6 +134,21 @@
       $username,
       password_hash($password, PASSWORD_ARGON2I)
     ]);
+
+    $userId = $db->lastInsertId();
+
+    $roles = ['USER'];
+
+    if ($userId == 1) {
+      $roles[] = 'ADMIN';
+    }
+
+    foreach ($roles as $role) {
+      $query = "SELECT id FROM roles WHERE name = '$role'";
+      $roleId = $db->query($query)->fetch(PDO::FETCH_ASSOC)['id'];
+      $query = "INSERT INTO users_roles (user_id, role_id) VALUES ($userId, $roleId)";
+      $db->query($query);
+    }
 
     return $result;
   }
